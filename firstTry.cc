@@ -1,25 +1,64 @@
+//Profesor, disculpe la molestia, era para recordarle que le falta una nota por revisar del compañero Daniel Torreglosa, del 1er corte.
+//POR FAVOR REVISAR EL MENSAJE DE ARRIBA!
 #include <iostream>
 #include <malloc.h>
 using namespace std;
 
-struct viaje{
+struct viaje {
     char nombreviaje[50];
     char destino[50];
     int precio = 0, capacidad = 0;
-    int altura, nmatricula=0, IdViaje=0;
+    int altura, nmatricula = 0, IdViaje = 0;
 
-    viaje *izq, *der; 
-}; 
+    viaje *izq, *der;
+};
 
 viaje *raiz, *aux2, *aux;
 
 struct pasajero {
-    char nombrepsj[50];
-    int doc = 0;
+    char destinopsj[50];
+    int valorpsj;
     pasajero* sig;
 };
 
-pasajero *aux1, *cab;
+pasajero *aux1, *cab, *alfa, *al1, *al2;
+
+int registrarpsj() {
+    al1 = (struct pasajero *)malloc(sizeof(struct pasajero));
+
+    cout << "Registre su destino: " << endl;
+    cin >> al1->destinopsj; 
+
+    cout << "Registre el valor del viaje: " << endl;
+    cin >> al1->valorpsj;
+
+    al1->sig = NULL;
+
+    if (alfa == NULL) {
+        alfa = al1;
+    } else {
+        al2 = alfa;
+
+        while (al2->sig != NULL) {
+            al2 = al2->sig;
+        }
+
+        al2->sig = al1;  
+    }
+    return 0;
+}
+
+int listarpsj() {
+    al1 = alfa;
+
+    while (al1 != NULL) {
+        cout << "Su destino es: " << al1->destinopsj << endl;
+        cout << "Su valor es: " << al1->valorpsj << endl << endl;
+        al1 = al1->sig;  
+    }
+
+    return 0;
+}
 
 int obtenerAltura(viaje *n) {
     if (n == NULL) {
@@ -151,6 +190,7 @@ int registrar() {
     return 0;
 }
 
+
 int listarViaje(viaje* viaje_actual) {
     if(viaje_actual != NULL) {
         cout << "INFORMACION DE REGISTROS: " << endl << endl;
@@ -178,9 +218,6 @@ viaje* buscarIdViaje(viaje* nodo, int idBusqueda) {
     }
 }
 
-
-
-
 int buscarYMostrarIdViaje(viaje* nodo, int idBusqueda) {
     viaje* resultado = buscarIdViaje(nodo, idBusqueda);
     if (resultado != NULL) {
@@ -197,16 +234,6 @@ int buscarYMostrarIdViaje(viaje* nodo, int idBusqueda) {
         return 0;
  }
 }
-
-
-
-
-
-
-
-
-
-
 
 int ubicar(viaje *aux3, int aguja) {
     if(aux3->IdViaje == aguja) {
@@ -292,7 +319,6 @@ int casotres() {
 return 0;
 }
 
-
 int eliminar() {
     int buscar;
     cout << "Ingrese el valor del codigo que desea eliminar..." << endl;
@@ -361,10 +387,10 @@ int main() {
                 
                 
             case 5: 
-                // Registrar pasajero
+                registrarpsj();
                 break;
             case 6: 
-                // Listar pasajeros
+                listarpsj();
             break;
             
             case 7: 
