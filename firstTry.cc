@@ -7,8 +7,11 @@ using namespace std;
 struct viaje {
     char nombreviaje[50];
     char destino[50];
-    int precio = 0, capacidad = 0;
-    int altura, nmatricula = 0, IdViaje = 0;
+    char nmatricula[50];
+    
+    
+    int precio , capacidad ;
+    int altura , IdViaje ;
 
     viaje *izq, *der;
 };
@@ -23,42 +26,6 @@ struct pasajero {
 
 pasajero *aux1, *cab, *alfa, *al1, *al2;
 
-int registrarpsj() {
-    al1 = (struct pasajero *)malloc(sizeof(struct pasajero));
-
-    cout << "Registre su destino: " << endl;
-    cin >> al1->destinopsj; 
-
-    cout << "Registre el valor del viaje: " << endl;
-    cin >> al1->valorpsj;
-
-    al1->sig = NULL;
-
-    if (alfa == NULL) {
-        alfa = al1;
-    } else {
-        al2 = alfa;
-
-        while (al2->sig != NULL) {
-            al2 = al2->sig;
-        }
-
-        al2->sig = al1;  
-    }
-    return 0;
-}
-
-int listarpsj() {
-    al1 = alfa;
-
-    while (al1 != NULL) {
-        cout << "Su destino es: " << al1->destinopsj << endl;
-        cout << "Su valor es: " << al1->valorpsj << endl << endl;
-        al1 = al1->sig;  
-    }
-
-    return 0;
-}
 
 int obtenerAltura(viaje *n) {
     if (n == NULL) {
@@ -180,13 +147,54 @@ int registrar() {
     cin >> aux2->nmatricula;
     cout << "Ingrese el nombre de la embarcacion: "; 
     cin >> aux2->nombreviaje; 
-    aux2->IdViaje = obtenerFecha();
+    
+    cout << "Ingrese su fecha (AAAAMMDD): "; 
+    cin >> aux2->IdViaje; 
+    
+    
     cout << "Ingrese el numero de pasajeros que se embarcaran: "; 
     cin >> aux2->capacidad;
     aux2->izq = NULL; 
     aux2->der = NULL; 
     aux2->altura = 1;
     raiz = insertar(raiz);
+    return 0;
+}
+
+int registrarpsj() {
+    al1 = (struct pasajero *)malloc(sizeof(struct pasajero));
+
+    cout << "Registre su destino: " << endl;
+    cin >> al1->destinopsj; 
+
+    cout << "Registre el valor del viaje: " << endl;
+    cin >> al1->valorpsj;
+
+    al1->sig = NULL;
+
+    if (alfa == NULL) {
+        alfa = al1;
+    } else {
+        al2 = alfa;
+
+        while (al2->sig != NULL) {
+            al2 = al2->sig;
+        }
+
+        al2->sig = al1;  
+    }
+    return 0;
+}
+
+int listarpsj() {
+    al1 = alfa;
+
+    while (al1 != NULL) {
+        cout << "Su destino es: " << al1->destinopsj << endl;
+        cout << "Su valor es: " << al1->valorpsj << endl << endl;
+        al1 = al1->sig;  
+    }
+
     return 0;
 }
 
@@ -382,10 +390,6 @@ int main() {
             case 4: 
                 eliminar(); 
                 break;
-
-                
-                
-                
             case 5: 
                 registrarpsj();
                 break;
@@ -401,5 +405,5 @@ int main() {
             break;
         }
     } while (op!=7);
-    return 0;
+    return 0;
 }
